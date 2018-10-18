@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<textarea class="textarea {{textareac?'textareac':''}}" name="textarea"></textarea>
+<text class="textarea {{textareac?'textareac':''}}" name="textarea">{{hour}}:{{minute}}:{{second}}:{{millisecond}}</text>
 <view class="position container {{back?'back':''}} {{show?'show':'hide'}}">
 </view>
 <button class='position start' bindlongtap="Start" bindtouchend="End">start</button>
