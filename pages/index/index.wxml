@@ -1,0 +1,5 @@
+<!--index.wxml-->
+<textarea class="textarea {{textareac?'textareac':''}}" name="textarea"></textarea>
+<view class="position container {{back?'back':''}} {{show?'show':'hide'}}">
+</view>
+<button class='position start' bindlongtap="Start" bindtouchend="End">start</button>
