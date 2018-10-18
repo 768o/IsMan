@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -12,8 +12,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.0.4",
-	"appid": "wx88c6cee30b551375",
-	"projectname": "IsMan",
+	"appid": "wx5fe4d4a0f423f8a9",
+	"projectname": "Long",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

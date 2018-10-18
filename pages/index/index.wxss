@@ -2,24 +2,24 @@
 .container {
   height: 100%;
   width: 100%;
-  background-color: #fff;
+  background-color: rgb(255, 255, 255);
   text-align: center;
 }
 .textarea{
-  border: 1px #aaa solid;
+  border: 1px rgb(212, 212, 212) solid;
   width: 80%;
-  height: 65px;
+  height: 55px;
   z-index: 99;
-  -webkit-transition-duration: 2s; /* Safari */
-  transition-duration: 2s;
-  color: #aaa;
+  -webkit-transition-duration: 3s; /* Safari */
+  transition-duration: 3s;
+  color: rgb(223, 221, 221);
   -webkit-transform: translate(-50%, -0%);
 	-moz-transform: translate(-50%, -0%);   
 	-ms-transform: translate(-50%, -0%);   
 	-o-transform: translate(-50%, -0%);   
 	transform: translate(-50%, -0%); 
   position:absolute;
-  top: 15%;
+  top: 20px;
   left: 50%;
   padding: 15px;
   margin-top: 15px;
@@ -27,9 +27,37 @@
   font-size: 35px;
 }
 .textareac{
-  color: #000;
   border-color: #000;
+  border:1px solid rgb(229, 255, 0);
+  box-shadow: 0 0 25px rgb(228, 245, 0); 
+  z-index:99
 }
+.rank{
+  border: 1px rgb(212, 212, 212) solid;
+  box-shadow: 0 0 25px rgb(212, 212, 212); 
+  width: 80%;
+  height: 180px;
+  z-index: 99;
+  -webkit-transition-duration: 1s; /* Safari */
+  transition-duration: 1s;
+  color: rgb(94, 94, 94);
+  -webkit-transform: translate(-50%, -0%);
+	-moz-transform: translate(-50%, -0%);   
+	-ms-transform: translate(-50%, -0%);   
+	-o-transform: translate(-50%, -0%);   
+	transform: translate(-50%, -0%); 
+  position:absolute;
+  top: 90px;
+  left: 50%;
+  padding: 15px;
+  margin-top: 15px;
+  background-color: rgb(224, 216, 93);
+}
+.rank_hide{
+  top : 150px;
+  opacity: 0
+}
+
 .position{
   -webkit-transform: translate(-50%, -50%);   
 	-moz-transform: translate(-50%, -50%);   
@@ -44,18 +72,18 @@
   width: 80px;
   height: 80px;
   border-radius: 80px;
-  border: 1px #aaa solid;
   line-height: 80px;
   z-index: 99;
+  background-color:chartreuse
 }
 .back{
-  background-color: #aaa;
+  background-color: rgb(54, 54, 54);
 }
 .show{
-  animation: show 2s ease forwards;
+  animation: show 1s ease forwards;
 }
 .hide{
-  animation: hide 1s ease forwards;
+  animation: hide 0.5s ease forwards;
 }
 @keyframes show{
   0%{ 
@@ -81,4 +109,23 @@
     border-radius: 80px;
     display: hide
   }
+}
+table{
+  width: 100%
+}
+td{
+  text-align: left;
+  min-width: 10%;
+}
+.td1{
+  float: left;
+  width: 10%;
+}
+.td2{
+  float: left;
+  width: 50%
+}
+.td3{
+  float: left;
+  width:50%
 }
