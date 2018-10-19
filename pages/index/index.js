@@ -1,109 +1,97 @@
 const app = getApp();
-var islong = false;
+var interval = null;
 Page({
-  data: {
-    show: false,
-    back: false,
-    hour: 0,
-    minute : 0,
-    second : 0,
-    millisecond : 0,
-    int : null,
-    rank:0,
-    data2:[]
+  data : {
+    longPressing : false,//是否长按中
+    time : {},
+    curRank : 0,
+    ranks : []
   },
-  onLoad: function () {
-    
+  onLoad : function () {
+    this.SetTime(0,0,0,0);
+    this.UpdateRank();
   },
-  Start: function(e){
+  longPress : function(e){
+    this.SetTime(0,0,0,0);
     this.setData({
-      hour: 0,
-      minute: 0,
-      second: 0,
-      millisecond: 0
+      longPressing : true,
     });
-    this.setData({
-      show : true,
-      back: true,
-    });
-    this.startTimeInterval();
-    islong = true;
+    this.StartTimeInterval();
   },
-  End:function(){
-    if(islong){
+  touchEnd : function(){
+    if(this.data.longPressing){
+      clearInterval(interval);
       var self = this;
-      this.setData({
-        show: false,
-      });
-      clearInterval(this.data.int);
       var ranks = app.globalData.ranks;
-      var inttime = app.globalData.inttime;
-      var strtime = this.data.hour + ":" + this.data.minute + ":" + this.data.second + ":" + this.data.millisecond;
-      var curTimeNumber = this.curTimeNumber();
+      var int_time = app.globalData.int_time;
+      var str_time = this.GetStrTime();
+      var curTimeNumber = this.CurTimeToNumber();
       for(var i=0; i<ranks.length;i++){
-        if (curTimeNumber > inttime[i]){
-          inttime.splice(i, 0, curTimeNumber) 
-          
-          ranks.splice(i, 0, strtime)
+        if (curTimeNumber > int_time[i]){
+          int_time.splice(i, 0, curTimeNumber) 
+          ranks.splice(i, 0, str_time)
           this.setData({
-            rank : i + 1
+            curRank : i + 1,
+            longPressing: false
           })
           this.UpdateRank()
           return
         }
       }
-      ranks.push(strtime)
-      inttime.push(curTimeNumber)
+      ranks.push(str_time)
+      int_time.push(curTimeNumber)
       this.setData({
-        rank: ranks.length
+        curRank : ranks.length,
+        longPressing : false
       })
       this.UpdateRank()
-      islong = false
     }
   },
   UpdateRank:function(){
     this.setData({
-      data2: app.globalData.ranks
+      ranks : app.globalData.ranks
     })
   },
-  curTimeNumber:function(){
-    return this.data.hour * 3600000 + this.data.minute * 60000 + this.data.second * 1000 + this.data.millisecond;
+  CurTimeToNumber:function(){
+    return this.data.time.hour * 3600000 + this.data.time.minute * 60000 + this.data.time.second * 1000 + this.data.time.millisecond;
   },
-  startTimeInterval:function(){
-    var self = this;
-    var intt = setInterval(function(){
-      self.timer()
+  StartTimeInterval:function(){
+    var self = this
+    interval = setInterval(function(){
+      self.Timer()
     }, 10)
+  },
+  Timer:function(){
+    var millisecond = this.data.time.millisecond + 10;
+    var second = this.data.time.second;
+    var minute = this.data.time.minute;
+    var hour = this.data.time.hour;
+    if (millisecond >= 1000){
+      millisecond = 0;
+      second += 1;
+    }
+    if (second >= 60) {
+      second = 0;
+      minute += 1;
+    }
+    if (minute >= 60) {
+        minute =  0;
+        hour += 1;
+    }
+    this.SetTime(hour, minute, second, millisecond);
+  },
+  SetTime: function (hour, minute, second, millisecond) {
+    var self = this;
     this.setData({
-      int : intt
+      time: {
+        hour: hour,
+        minute: minute,
+        second: second,
+        millisecond: millisecond,
+      }
     });
   },
-  timer:function(){
-    var mil = this.data.millisecond;
-    this.setData({
-      millisecond : mil + 10
-    })
-    if (this.data.millisecond >= 1000){
-      var sec = this.data.second;
-      this.setData({
-        millisecond: 0,
-        second : sec + 1
-      })
-    }
-    if (this.data.second >= 60) {
-      var min = this.data.minute;
-      this.setData({
-        minute: min + 1,
-        second : 0
-      })
-    }
-
-    if (this.data.minute >= 60) {
-      var hou = this.data.hour;
-      this.setData({
-        minute: 0,
-        hour: hou +1
-      })
-    }
+  GetStrTime : function(){
+    return this.data.time.hour + ":" + this.data.time.minute + ":" + this.data.time.second + ":" + this.data.time.millisecond;
   }
 })

@@ -5,7 +5,7 @@
   background-color: rgb(255, 255, 255);
   text-align: center;
 }
-.textarea{
+.time{
   border: 1px rgb(212, 212, 212) solid;
   width: 80%;
   height: 55px;
@@ -26,7 +26,7 @@
   text-align: center;
   font-size: 35px;
 }
-.textareac{
+.time_run{
   border-color: #000;
   border:1px solid rgb(229, 255, 0);
   box-shadow: 0 0 25px rgb(228, 245, 0); 
@@ -86,6 +86,10 @@
 .hide{
   animation: hide 0.5s ease forwards;
 }
+.rank_col{
+  float: left;
+  width: 50%
+}
 @keyframes show{
   0%{ 
       width: 80px;
@@ -110,23 +114,4 @@
     border-radius: 80px;
     display: hide
   }
-}
-table{
-  width: 100%
-}
-td{
-  text-align: left;
-  min-width: 10%;
-}
-.td1{
-  float: left;
-  width: 10%;
-}
-.td2{
-  float: left;
-  width: 50%
-}
-.td3{
-  float: left;
-  width:50%
 }

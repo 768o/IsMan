@@ -1,13 +1,11 @@
 <!--index.wxml-->
-<text class="textarea {{show?'textareac':''}}" name="textarea">{{hour}}:{{minute}}:{{second}}:{{millisecond}}</text>
-<view class="rank {{show?'rank_hide':''}}">
-  <view wx:for="{{data2}}" wx:key="{{rank.Name}}" wx:for-index="index" wx:for-item="{{rank}}">
-    <text class='td2' wx:if="{{index < 6}}">{{index + 1}}</text>
-    <text class='td3' wx:if="{{index < 6}}">{{data2[index]}}</text>
+<text class="time {{longPressing?'time_run':''}}">{{time.hour}}:{{time.minute}}:{{time.second}}:{{time.millisecond}}</text>
+<view class="rank {{longPressing?'rank_hide':''}}">
+  <view wx:for="{{ranks}}" wx:key="{{ranks}}" wx:for-index="index">
+    <text class='rank_col' wx:if="{{index < 6}}">{{index + 1}}</text>
+    <text class='rank_col' wx:if="{{index < 6}}">{{ranks[index]}}</text>
   </view>
-  <view>
-    本次排名：{{rank}}
-  </view>
+  <view>本次排名：{{curRank}}</view>
 </view>
-<view class="position container {{back?'back':''}} {{show?'show':'hide'}}"></view>
-<button class='position start' bindlongpress="Start" bindtouchend="End">start</button>
+<view class="position container {{longPressing?'back':''}} {{longPressing?'show':'hide'}}"></view>
+<button class='position start' bindlongpress="longPress" bindtouchend="touchEnd">start</button>

@@ -36,6 +36,6 @@ App({
   globalData: {
     userInfo: null,
     ranks:[],
-    inttime:[]
+    int_time:[]
   }
 })
