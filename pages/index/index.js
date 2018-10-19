@@ -1,39 +1,21 @@
 const app = getApp();
+var islong = false;
 Page({
   data: {
     show: false,
     back: false,
-    textareac : false,
     hour: 0,
     minute : 0,
     second : 0,
-    nickName:"默认",
     millisecond : 0,
     int : null,
     rank:0,
-    data2:[{
-      Name:"null",
-      Time:"0:0:0:0"
-    }, {
-        Name: "null",
-        Time: "0:0:0:0"
-    }]
+    data2:[]
   },
   onLoad: function () {
-    var self = this;
-    wx.request({
-      url: 'http://193.112.7.152/api/values/Get',
-      success(res){
-        console.log(res.data);
-        self.setData({
-          data2:res.data
-        })
-        console.log(self.data.data2)
-      }
-    })
+    
   },
   Start: function(e){
-    console.log(e)
     this.setData({
       hour: 0,
       minute: 0,
@@ -43,39 +25,51 @@ Page({
     this.setData({
       show : true,
       back: true,
-      textareac : true
     });
-    this.starttimer();
-  },
-  onGotUserInfo:function(e){
-    console.log(e)
-    if (e.detail.userInfo != null) {    //用户点击允许授权
-    this.setData({
-      nickName : e.detail.userInfo.nickName,
-    })
-    }
+    this.startTimeInterval();
+    islong = true;
   },
   End:function(){
-    var self = this;
-    this.setData({
-      show: false,
-      textareac : false
-    });
-    clearInterval(this.data.int);
-    var name = self.data.nickName || "NAN"
-    wx.request({
-      url: "http://193.112.7.152/api/values/Post?name=" + name
-        + "&time=" + self.data.hour+":"+self.data.minute+":"+self.data.second+":"+  self.data.millisecond,
-      success(res) {
-        console.log(res)
-        self.setData({
-          rank:res.data + 1
-        })
-        self.onLoad()
+    if(islong){
+      var self = this;
+      this.setData({
+        show: false,
+      });
+      clearInterval(this.data.int);
+      var ranks = app.globalData.ranks;
+      var inttime = app.globalData.inttime;
+      var strtime = this.data.hour + ":" + this.data.minute + ":" + this.data.second + ":" + this.data.millisecond;
+      var curTimeNumber = this.curTimeNumber();
+      for(var i=0; i<ranks.length;i++){
+        if (curTimeNumber > inttime[i]){
+          inttime.splice(i, 0, curTimeNumber) 
+          
+          ranks.splice(i, 0, strtime)
+          this.setData({
+            rank : i + 1
+          })
+          this.UpdateRank()
+          return
+        }
       }
+      ranks.push(strtime)
+      inttime.push(curTimeNumber)
+      this.setData({
+        rank: ranks.length
+      })
+      this.UpdateRank()
+      islong = false
+    }
+  },
+  UpdateRank:function(){
+    this.setData({
+      data2: app.globalData.ranks
     })
   },
-  starttimer(){
+  curTimeNumber:function(){
+    return this.data.hour * 3600000 + this.data.minute * 60000 + this.data.second * 1000 + this.data.millisecond;
+  },
+  startTimeInterval:function(){
     var self = this;
     var intt = setInterval(function(){
       self.timer()

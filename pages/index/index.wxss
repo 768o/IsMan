@@ -69,12 +69,13 @@
   left: 50%;
 }
 .start{
+  background-color:rgb(224, 216, 93);
   width: 80px;
   height: 80px;
   border-radius: 80px;
   line-height: 80px;
   z-index: 99;
-  background-color:chartreuse
+  box-shadow: 0 0 25px rgb(212, 212, 212); 
 }
 .back{
   background-color: rgb(54, 54, 54);
