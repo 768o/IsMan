@@ -1,0 +1,105 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+<style>
+    #div1{
+		margin-top: 100px;
+		width: 100%;
+		border-bottom: 1px solid #000000;
+    }
+	#div2{
+		height:10px;
+		width:10px;
+		margin-top:-5px;
+		background-color:white;
+		margin-left:100%;
+	}
+	.div2d{
+		animation: show 2s linear infinite;
+	}
+	@keyframes show{
+		0%{ 
+		}
+		100%{
+			margin-left:0%;
+		}
+	}
+	#circle {
+		display: block; 
+		border-radius: 50%; 
+		height: 30px; 
+		width: 30px; 
+		margin: 0; 
+		background-color:white;
+		border: 1px solid #000000;
+		text-align:center;
+		line-height:30px;
+		margin-top:-40px;
+		margin-left:25px
+	}
+	.circled{
+		animation: gun 2s linear infinite;
+	}
+	.circle
+	@keyframes gun{
+		0% {transform : rotate(0deg);}
+		100% {transform : rotate(360deg);}
+	}
+	#triangle_border_down{
+		width:0;
+		height:0;
+		border-width:30px 10px 0;
+		border-style:solid;
+		border-color:#333 transparent transparent;/*灰 透明 透明 */
+		position:relative;
+		margin-top:-90px;
+		margin-left:5px;
+		animation-direction: alternate;
+	}
+	.triangle_border_downd{
+		animation: down 0.2s linear infinite;
+	}
+	@keyframes down{
+		0% {}
+		50% {margin-top:-30px}
+		100%{margin-top:-28px}
+	}
+	
+	#long{
+		z-index:999;
+	}
+}
+</style>
+<script>
+var timeout ;  
+$(function(){
+	$("#long").mousedown(function() {  
+		timeout = setTimeout(function() {  
+			longclick();
+		}, 500);  
+	});  
+	   
+	$("#long").mouseup(function() {  
+		clearTimeout(timeout);
+		clickup();
+	});
+	function longclick(){
+		console.log("长按开始");
+	}
+	function clickup(){
+		console.log("长按结束");
+	}
+})  
+</script>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+	<div id="circle">T_T</div>
+	<div id="triangle_border_down">
+		<span></span>
+	</div>
+	<div id="long" style="margin-bottom:100px;">开始</div>
+</body>
+</html>
